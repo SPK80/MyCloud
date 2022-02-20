@@ -2,11 +2,21 @@ process.env.NODE_ENV = 'development'
 
 import express, { json, urlencoded } from 'express'
 import { readFile, writeFile } from 'fs'
+import favicon from 'express-favicon'
+import cors from 'cors'
 
 const host = 'localhost'
 const port = 8000
 
 const app = express()
+
+app.use(favicon('favicon.ico'));
+
+// const corsOptions = {
+// 	origin: "http://localhost:3000",
+// };
+app.use(cors());
+
 app.use(json())
 app.use(urlencoded({ extended: true }))
 
@@ -53,7 +63,7 @@ app
 					.status(409)
 					.send({ message: 'Record already exists.' })
 
-			req.records[req.body.record.id] = req.body.record
+			req.records[req.body.record.id] = req.body.record.text
 
 			writeFile(
 				file,
