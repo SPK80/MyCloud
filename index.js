@@ -113,32 +113,35 @@ app
 				.send({ message: 'Bad request.' })
 	})
 	.delete((req, res) => {
-		if (req.query.id) {
-			if (req.records.hasOwnProperty(req.query.id)) {
-				delete req.records[req.query.id]
-
-				writeFile(
-					file,
-					JSON.stringify(req.records),
-					(err, response) => {
-						if (err)
-							return res
-								.status(500)
-								.send({ message: 'Unable delete record.' })
-
-						return res
-							.status(200)
-							.send({ message: 'Record deleted.' })
-					}
-				)
-			} else
-				return res
-					.status(404)
-					.send({ message: 'Record not found.' })
-		} else
+		console.log('delete:', req.query);
+		if (!req.query?.id) {
 			return res
 				.status(400)
 				.send({ message: 'Bad request.' })
+		}
+
+		if (!req.records.hasOwnProperty(req.query.id)) {
+			return res
+				.status(404)
+				.send({ message: 'Record not found.' })
+		}
+
+		delete req.records[req.query.id]
+
+		writeFile(
+			file,
+			JSON.stringify(req.records),
+			(err, response) => {
+				if (err)
+					return res
+						.status(500)
+						.send({ message: 'Unable delete record.' })
+
+				return res
+					.status(200)
+					.send({ message: 'Record deleted.' })
+			}
+		)
 	})
 
 app.listen(port, host, () =>
