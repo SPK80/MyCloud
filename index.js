@@ -6,7 +6,7 @@ import favicon from 'express-favicon'
 import cors from 'cors'
 
 const host = 'localhost'
-const port = 8000
+const port = process.env.port || 80
 
 const app = express()
 
