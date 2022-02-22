@@ -5,7 +5,6 @@ import { readFile, writeFile } from 'fs'
 import favicon from 'express-favicon'
 import cors from 'cors'
 
-const host = 'localhost'
 const port = process.env.port || 80
 
 const app = express()
@@ -144,6 +143,6 @@ app
 		)
 	})
 
-app.listen(port, host, () =>
-	console.log(`Server listens http://${host}:${port}`)
+app.listen(port, () =>
+	console.log(`Server listens port:${port}`)
 )
