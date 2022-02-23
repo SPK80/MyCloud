@@ -12,12 +12,7 @@ const PORT = process.env.PORT || 8000
 const app = express()
 app.use(favicon(path.resolve(__dirname, 'favicon.ico')));
 app.use(express.static('static'));
-
-// const corsOptions = {
-// 	origin: "http://localhost:3000",
-// };
 app.use(cors());
-
 app.use(json())
 app.use(urlencoded({ extended: true }))
 
