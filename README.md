@@ -1,7 +1,5 @@
-## MyCloud
+# My-Records-Server
+
 REST API server
 
-### Endpoints
-* records
-
-*Based on the example in https://nodejsdev.ru/doc/rest-api/*
+Based on the example <https://nodejsdev.ru/doc/rest-api/>
