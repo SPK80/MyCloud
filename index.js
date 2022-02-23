@@ -1,15 +1,17 @@
-process.env.NODE_ENV = 'development'
-
 import express, { json, urlencoded } from 'express'
-import { readFile, writeFile } from 'fs'
 import favicon from 'express-favicon'
+import { readFile, writeFile } from 'fs'
+import path from 'path'
 import cors from 'cors'
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const port = process.env.port || 80
+const PORT = process.env.PORT || 8000
 
 const app = express()
-
-app.use(favicon('favicon.ico'));
+app.use(favicon(path.resolve(__dirname, 'favicon.ico')));
+app.use(express.static('static'));
 
 // const corsOptions = {
 // 	origin: "http://localhost:3000",
@@ -19,9 +21,10 @@ app.use(cors());
 app.use(json())
 app.use(urlencoded({ extended: true }))
 
-let file = 'data.json'
+let file = path.resolve(__dirname, 'data.json');
 
-if ((process.env.NODE_ENV = 'test')) file = 'data-test.json'
+if ((process.env.NODE_ENV = 'test'))
+	file = path.resolve(__dirname, 'data-test.json');
 
 app.use((req, res, next) => {
 	readFile(file, (err, data) => {
@@ -36,8 +39,7 @@ app.use((req, res, next) => {
 	})
 })
 
-app
-	.route('/api/records')
+app.route('/api/records')
 	.get((req, res) => {
 		if (req.query.id) {
 			if (req.records.hasOwnProperty(req.query.id))
@@ -112,7 +114,7 @@ app
 				.send({ message: 'Bad request.' })
 	})
 	.delete((req, res) => {
-		console.log('delete:', req.query);
+		// console.log('delete:', req.query);
 		if (!req.query?.id) {
 			return res
 				.status(400)
@@ -143,6 +145,7 @@ app
 		)
 	})
 
-app.listen(port, () =>
-	console.log(`Server listens port:${port}`)
-)
+app.listen(PORT, () => {
+	console.log(`Server listens port:${PORT}`);
+	// console.log(__dirname);
+})

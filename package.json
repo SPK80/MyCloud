@@ -1,12 +1,11 @@
 {
-	"name": "mycloud",
-	"version": "0.1.0",
+	"name": "my-records-server",
+	"version": "0.2.0",
 	"description": "",
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"start": "node index",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "node index"
 	},
 	"author": "SPK80",
 	"license": "ISC",
