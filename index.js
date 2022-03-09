@@ -87,7 +87,7 @@ app.route('/api/records')
 					.status(404)
 					.send({ message: 'Record not found.' })
 
-			req.records[req.body.record.id] = req.body.record
+			req.records[req.body.record.id] = req.body.record.text
 
 			writeFile(
 				file,
