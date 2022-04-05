@@ -1,5 +1,5 @@
 import sql from 'msnodesqlv8';
-import config from './config.json';
+import config from './config.js';
 
 const connectionString = `server=${config.server};Database=${config.database};Trusted_Connection=Yes;Driver={SQL Server Native Client 11.0}`;
 
